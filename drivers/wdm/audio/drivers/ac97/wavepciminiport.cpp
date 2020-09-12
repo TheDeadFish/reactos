@@ -745,12 +745,12 @@ NTSTATUS CMiniportWaveICH::BuildDataRangeInformation (void)
     // Check for the render sample rates.
     for (nLoop = 0; nLoop < WAVE_SAMPLERATES_TESTED; nLoop++)
     {
-        ntStatus = AdapterCommon->ProgramSampleRate (AC97REG_FRONT_SAMPLERATE,
-                                                     dwWaveSampleRates[nLoop]);
+       // ntStatus = AdapterCommon->ProgramSampleRate (AC97REG_FRONT_SAMPLERATE,
+        //                                             dwWaveSampleRates[nLoop]);
 
         // We support the sample rate?
-        if (NT_SUCCESS (ntStatus))
-        {
+       // if (NT_SUCCESS (ntStatus))
+       // {
             // Add it to the PinDataRange
             PinDataRangesPCMStreamRender[nWavePlaybackEntries].DataRange.FormatSize = sizeof(KSDATARANGE_AUDIO);
             PinDataRangesPCMStreamRender[nWavePlaybackEntries].DataRange.Flags      = 0;
@@ -762,15 +762,17 @@ NTSTATUS CMiniportWaveICH::BuildDataRangeInformation (void)
             PinDataRangesPCMStreamRender[nWavePlaybackEntries].MaximumChannels = nChannels;
             PinDataRangesPCMStreamRender[nWavePlaybackEntries].MinimumBitsPerSample = 16;
             PinDataRangesPCMStreamRender[nWavePlaybackEntries].MaximumBitsPerSample = 16;
-            PinDataRangesPCMStreamRender[nWavePlaybackEntries].MinimumSampleFrequency = dwWaveSampleRates[nLoop];
-            PinDataRangesPCMStreamRender[nWavePlaybackEntries].MaximumSampleFrequency = dwWaveSampleRates[nLoop];
+            PinDataRangesPCMStreamRender[nWavePlaybackEntries].MinimumSampleFrequency = 8000;
+            PinDataRangesPCMStreamRender[nWavePlaybackEntries].MaximumSampleFrequency = 48000;
 
             // Add it to the PinDataRangePointer
             PinDataRangePointersPCMStreamRender[nWavePlaybackEntries] = (PKSDATARANGE)&PinDataRangesPCMStreamRender[nWavePlaybackEntries];
 
             // Increase count
             nWavePlaybackEntries++;
-        }
+       // }
+       
+       break;
     }
 
     // Check for the capture sample rates.
