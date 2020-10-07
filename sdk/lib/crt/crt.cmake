@@ -174,6 +174,7 @@ list(APPEND CRT_SOURCE
     printf/wstreamout.c
     process/_cwait.c
     process/_system.c
+    process/_wsystem.c
     process/dll.c
     process/process.c
     process/procid.c

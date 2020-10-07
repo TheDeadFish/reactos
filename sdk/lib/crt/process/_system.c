@@ -12,24 +12,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <process.h>
-
+#include <tchar.h>
 
 /*
  * @implemented
  */
-int system(const char *command)
+int _tsystem(const TCHAR *command)
 {
-  char *szCmdLine = NULL;
-  char *szComSpec = NULL;
+  TCHAR *szCmdLine = NULL;
+  TCHAR *szComSpec = NULL;
 
   PROCESS_INFORMATION ProcessInformation;
-  STARTUPINFOA StartupInfo;
-  char *s;
+  STARTUPINFO StartupInfo;
+  TCHAR *s;
   BOOL result;
 
   int nStatus;
 
-  szComSpec = getenv("COMSPEC");
+  szComSpec = _tgetenv(_T("COMSPEC"));
 
 // system should return 0 if command is null and the shell is found
 
@@ -48,29 +48,29 @@ int system(const char *command)
 
   if (szComSpec == NULL)
   {
-    szComSpec = "cmd.exe";
+    szComSpec = _T("cmd.exe");
   }
 
   /* split the path from shell command */
-  s = max(strrchr(szComSpec, '\\'), strrchr(szComSpec, '/'));
+  s = max(_tcsrchr(szComSpec, '\\'), _tcsrchr(szComSpec, '/'));
   if (s == NULL)
     s = szComSpec;
   else
     s++;
 
-  szCmdLine = malloc(strlen(s) + 4 + strlen(command) + 1);
+  szCmdLine = malloc((_tcslen(s) + 4 + _tcslen(command) + 1)*sizeof(TCHAR));
   if (szCmdLine == NULL)
   {
      _set_errno(ENOMEM);
      return -1;
   }
 
-  strcpy(szCmdLine, s);
-  s = strrchr(szCmdLine, '.');
+  _tcscpy(szCmdLine, s);
+  s = _tcsrchr(szCmdLine, '.');
   if (s)
     *s = 0;
-  strcat(szCmdLine, " /C ");
-  strcat(szCmdLine, command);
+  _tcscat(szCmdLine,_T(" /C "));
+  _tcscat(szCmdLine, command);
 
 //command file has invalid format ENOEXEC
 
@@ -89,7 +89,7 @@ int system(const char *command)
 
 //SIGCHILD should be blocked aswell
 
-  result = CreateProcessA(szComSpec,
+  result = CreateProcess(szComSpec,
 	                  szCmdLine,
 			  NULL,
 			  NULL,
@@ -116,8 +116,3 @@ int system(const char *command)
   return nStatus;
 }
 
-int CDECL _wsystem(const wchar_t* cmd)
-{
-    FIXME("_wsystem stub\n");
-    return -1;
-}
