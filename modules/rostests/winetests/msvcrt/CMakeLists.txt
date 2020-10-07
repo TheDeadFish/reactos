@@ -19,6 +19,7 @@ list(APPEND SOURCE
     locale.c
     misc.c
     printf.c
+    process.c
     scanf.c
     signal.c
     string.c

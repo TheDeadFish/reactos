@@ -13,6 +13,7 @@ extern void func_heap(void);
 extern void func_locale(void);
 extern void func_misc(void);
 extern void func_printf(void);
+extern void func_process(void);
 extern void func_scanf(void);
 extern void func_signal(void);
 extern void func_string(void);
@@ -30,6 +31,7 @@ const struct test winetest_testlist[] =
     { "locale", func_locale },
     { "misc", func_misc },
     { "printf", func_printf },
+    { "process", func_process },
     { "scanf", func_scanf },
     { "signal", func_signal },
     { "string", func_string },
