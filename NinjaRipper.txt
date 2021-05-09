@@ -1,0 +1,17 @@
+How to RIP Textures and models from Game based on DX8,DX9 ,DX10, DX11.
+
+1. I am using CSGO with Steam. 
+2. Using Ninja Ripper 1.7.1 
+3. Download CS_GO from Steam. 
+4. Add -insecure in Settings->properties-General-Launch Options- Add"-insecure".
+5. Extract Ninja Ripper DownloadLink :https://gamebanana.com/tools/5638.
+6. Open the application.
+7. Browse to Exe of CS_GO. 
+8. Select D3D9Wrapper.
+9. Select Output directory. 
+10. Check Buttons assigned to rip in settings. F3, F2, F12.
+12. Click on run, withopen Steam It may throw error Ignore. Launch game from steam and Press F12. 
+13. Done. Check outDir for texture and Models. 
+
+Thanks 
+Please Share ,Subs and Like. 
